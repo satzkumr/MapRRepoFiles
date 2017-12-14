@@ -1,3 +1,3 @@
 #/bin/bash
 mount -o nolock 10.10.71.23:/mapr /tmp/nfsmount
-dd if=/dev/zero of=/tmp/nfsmount/`hostname -f`.disk
+dd if=/dev/zero of=/tmp/nfsmount/My52Cluster_72/tmp/`hostname -f`
