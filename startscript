@@ -1,4 +1,5 @@
 #/bin/bash
 mount -o nolock 10.10.71.23:/mapr /tmp/nfsmount
-head /dev/urandom | tr -dc a-z0-9 | tail -c 17 ; echo '' > /opt/mapr/hostid
+chmod u+w /opt/mapr/hostid
+head /dev/urandom | tr -dc a-z0-9 | head -c 17 2>&1> /opt/mapr/hostid
 dd if=/dev/zero of=/tmp/nfsmount/My52Cluster_72/tmp/`hostname -f` bs=1G count=10
