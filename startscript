@@ -1,5 +1,30 @@
 #/bin/bash
-mount -o nolock 10.10.71.23:/mapr /tmp/nfsmount
+
+#Mounting NFS Storage
+CLUSTER_NAME=$1
+NFS_SERVER=$2
+DISKS_FILEPATH=$3
+DISKS_PER_NODE=$4
+
+#Mounting NFS server
+mount -o nolock $NFS_SERVER:/mapr /tmp/nfsmount
+
+#Generating Host ID
 chmod u+w /opt/mapr/hostid
-head /dev/urandom | tr -dc a-z0-9 | head -c 17 2>&1> /opt/mapr/hostid
-dd if=/dev/zero of=/tmp/nfsmount/My52Cluster_72/tmp/`hostname -f` bs=1G count=10
+/opt/mapr/server/mruuidgen > /opt/mapr/hostid
+
+#Creating Directories for disks on NFS
+
+mkdir $DISKS_FILEPATH/$CLUSTER_NAME
+
+i=1;
+echo "" > /tmp/disks
+
+while [ $i -le $DISKS_PER_NODE ];
+do
+    dd if=/dev/zero of=$DISKS_FILEPATH/$CLUSTER_NAME/`hostname -f`.$i seek=0 bs=1G count=10
+    echo "$DISKS_FILEPATH/$CLUSTER_NAME/`hostname -f`.$i" >> /tmp/disks
+    i=$((i+1))
+done;
+
+#End
