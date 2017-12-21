@@ -22,7 +22,7 @@ echo "" > /tmp/disks
 
 while [ $i -le $DISKS_PER_NODE ];
 do
-    dd if=/dev/zero of=$DISKS_FILEPATH/$CLUSTER_NAME/`hostname -f`.$i seek=0 bs=1G count=10
+    dd if=/dev/zero of=$DISKS_FILEPATH/$CLUSTER_NAME/`hostname -f`.$i seek=20G bs=1 count=0
     echo "$DISKS_FILEPATH/$CLUSTER_NAME/`hostname -f`.$i" >> /tmp/disks
     i=$((i+1))
 done;
