@@ -27,4 +27,6 @@ do
     i=$((i+1))
 done;
 
+/bin/bash
+
 #End
