@@ -27,6 +27,14 @@ do
     i=$((i+1))
 done;
 
+# Setting up Sshd
+
+#Generating keys
+/usr/bin/ssh-keygen -A
+
+#Starting sshd
+/usr/sbin/sshd
+
 /bin/bash
 
 #End
