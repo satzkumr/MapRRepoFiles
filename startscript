@@ -35,6 +35,11 @@ done;
 #Starting sshd
 /usr/sbin/sshd
 
+#Creating mapr user
+useradd -u 5000 -U mapr
+usermod -a -G shadow mapr
+echo "mapr" | passwd --stdin mapr
+
 /bin/bash
 
 #End
